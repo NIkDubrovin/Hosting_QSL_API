@@ -18,14 +18,15 @@ namespace Hosting_Dubr
         /*                       ExecutedCommand()
          *  Универсальный метод для построения запросов к серверу 
          *  В string url конвертируем и передаем link(хост),command(API),parameters(id,..)
-         *  Возвращаем при помощи WebClient url-строку
+         *  Возвращаем при помощи WebClient загруженную url-строку
+         *  Т.е. Загружает запрошенный ресурс в виде String. Ресурс для загрузки, указанный как Uri.
          */
         #region ExecutedCommand
         private static string ExecutedCommand(string command, string parameters= null) 
         {
             WebClient cilent = new WebClient();
             string url = String.Format("{0}?command={1}&parameters={2}", link, command, parameters);
-            return cilent.DownloadString(url);
+            return cilent.DownloadString(url);  // Выполняет её и возвращает, то ,что получили в результате её выполнения
         }
         #endregion
 
@@ -48,7 +49,7 @@ namespace Hosting_Dubr
         }
         #endregion
 
-        /*                       StudentsDeleteByid()
+     /*                                    StudentsDeleteByid()
       *  command - удалить элемент по id 
       *  Праметры - id, которые получили из dataGrid.  Cм. DeleteById()
       *  Запрос - students.delete.byid

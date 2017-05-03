@@ -12,7 +12,6 @@ namespace Hosting_Dubr
 {
     public partial class Form1 : Form
     {
-        #region Работа с API
         /*
          *                                  Вспомогательные методы
          *  ***************************************************************************                                
@@ -43,6 +42,8 @@ namespace Hosting_Dubr
          *  buttonDeleteById_Click()                                 --------------  Передаем функции в buttons
          *  buttonAddStudent_Click()     ---------------------------|                 
          */
+        #region Работа с API  
+
         private void GetAllStudents()
         {
             dataGridViewStudents.Rows.Clear();
@@ -107,7 +108,7 @@ namespace Hosting_Dubr
 
             GetAllStudents();
         }
-        #endregion
+        #endregion   // 
 
         public Form1()
         {
