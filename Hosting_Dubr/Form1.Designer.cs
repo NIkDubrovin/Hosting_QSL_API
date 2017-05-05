@@ -48,6 +48,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.maskedTextBoxAge = new System.Windows.Forms.MaskedTextBox();
             this.buttonAddStudent = new System.Windows.Forms.Button();
+            this.buttonDeleteAll = new System.Windows.Forms.Button();
+            this.comboBoxTable = new System.Windows.Forms.ComboBox();
+            this.buttonDeleteTable = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelTable = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStudents)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,7 +125,7 @@
             // labelFirstName
             // 
             this.labelFirstName.AutoSize = true;
-            this.labelFirstName.Location = new System.Drawing.Point(33, 294);
+            this.labelFirstName.Location = new System.Drawing.Point(26, 367);
             this.labelFirstName.Name = "labelFirstName";
             this.labelFirstName.Size = new System.Drawing.Size(54, 13);
             this.labelFirstName.TabIndex = 3;
@@ -129,7 +134,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(158, 294);
+            this.label2.Location = new System.Drawing.Point(148, 367);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 4;
@@ -137,14 +142,14 @@
             // 
             // textBoxFirstName
             // 
-            this.textBoxFirstName.Location = new System.Drawing.Point(9, 325);
+            this.textBoxFirstName.Location = new System.Drawing.Point(6, 395);
             this.textBoxFirstName.Name = "textBoxFirstName";
             this.textBoxFirstName.Size = new System.Drawing.Size(100, 20);
             this.textBoxFirstName.TabIndex = 6;
             // 
             // textBoxLastName
             // 
-            this.textBoxLastName.Location = new System.Drawing.Point(128, 325);
+            this.textBoxLastName.Location = new System.Drawing.Point(125, 395);
             this.textBoxLastName.Name = "textBoxLastName";
             this.textBoxLastName.Size = new System.Drawing.Size(100, 20);
             this.textBoxLastName.TabIndex = 7;
@@ -156,7 +161,7 @@
             this.comboBoxSex.Items.AddRange(new object[] {
             "Мужской",
             "Женский"});
-            this.comboBoxSex.Location = new System.Drawing.Point(243, 325);
+            this.comboBoxSex.Location = new System.Drawing.Point(244, 395);
             this.comboBoxSex.Name = "comboBoxSex";
             this.comboBoxSex.Size = new System.Drawing.Size(121, 21);
             this.comboBoxSex.TabIndex = 8;
@@ -164,7 +169,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(280, 294);
+            this.label3.Location = new System.Drawing.Point(285, 367);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(25, 13);
             this.label3.TabIndex = 9;
@@ -172,7 +177,7 @@
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(496, 325);
+            this.textBoxDescription.Location = new System.Drawing.Point(513, 395);
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(100, 20);
             this.textBoxDescription.TabIndex = 10;
@@ -180,7 +185,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(415, 294);
+            this.label4.Location = new System.Drawing.Point(415, 367);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 11;
@@ -189,7 +194,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(519, 294);
+            this.label5.Location = new System.Drawing.Point(536, 367);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 13);
             this.label5.TabIndex = 12;
@@ -197,7 +202,7 @@
             // 
             // maskedTextBoxAge
             // 
-            this.maskedTextBoxAge.Location = new System.Drawing.Point(381, 326);
+            this.maskedTextBoxAge.Location = new System.Drawing.Point(385, 395);
             this.maskedTextBoxAge.Mask = "00000";
             this.maskedTextBoxAge.Name = "maskedTextBoxAge";
             this.maskedTextBoxAge.Size = new System.Drawing.Size(100, 20);
@@ -206,19 +211,68 @@
             // 
             // buttonAddStudent
             // 
-            this.buttonAddStudent.Location = new System.Drawing.Point(128, 352);
+            this.buttonAddStudent.Location = new System.Drawing.Point(87, 430);
             this.buttonAddStudent.Name = "buttonAddStudent";
-            this.buttonAddStudent.Size = new System.Drawing.Size(384, 23);
+            this.buttonAddStudent.Size = new System.Drawing.Size(384, 31);
             this.buttonAddStudent.TabIndex = 14;
             this.buttonAddStudent.Text = "Добавить Студента";
             this.buttonAddStudent.UseVisualStyleBackColor = true;
             this.buttonAddStudent.Click += new System.EventHandler(this.buttonAddStudent_Click);
             // 
+            // buttonDeleteAll
+            // 
+            this.buttonDeleteAll.Location = new System.Drawing.Point(13, 253);
+            this.buttonDeleteAll.Name = "buttonDeleteAll";
+            this.buttonDeleteAll.Size = new System.Drawing.Size(109, 23);
+            this.buttonDeleteAll.TabIndex = 15;
+            this.buttonDeleteAll.Text = "Очистить таблицу";
+            this.buttonDeleteAll.UseVisualStyleBackColor = true;
+            this.buttonDeleteAll.Click += new System.EventHandler(this.buttonDeleteAll_Click);
+            // 
+            // comboBoxTable
+            // 
+            this.comboBoxTable.FormattingEnabled = true;
+            this.comboBoxTable.Location = new System.Drawing.Point(508, 278);
+            this.comboBoxTable.Name = "comboBoxTable";
+            this.comboBoxTable.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxTable.TabIndex = 16;
+            // 
+            // buttonDeleteTable
+            // 
+            this.buttonDeleteTable.Location = new System.Drawing.Point(508, 305);
+            this.buttonDeleteTable.Name = "buttonDeleteTable";
+            this.buttonDeleteTable.Size = new System.Drawing.Size(121, 28);
+            this.buttonDeleteTable.TabIndex = 17;
+            this.buttonDeleteTable.Text = "Удалить Таблицу";
+            this.buttonDeleteTable.UseVisualStyleBackColor = true;
+            this.buttonDeleteTable.Click += new System.EventHandler(this.buttonDeleteTable_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(229, 262);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Таблицы";
+            // 
+            // labelTable
+            // 
+            this.labelTable.Location = new System.Drawing.Point(210, 281);
+            this.labelTable.Name = "labelTable";
+            this.labelTable.Size = new System.Drawing.Size(231, 68);
+            this.labelTable.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 386);
+            this.ClientSize = new System.Drawing.Size(651, 487);
+            this.Controls.Add(this.labelTable);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.buttonDeleteTable);
+            this.Controls.Add(this.comboBoxTable);
+            this.Controls.Add(this.buttonDeleteAll);
             this.Controls.Add(this.buttonAddStudent);
             this.Controls.Add(this.maskedTextBoxAge);
             this.Controls.Add(this.label5);
@@ -263,6 +317,11 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxAge;
         private System.Windows.Forms.Button buttonAddStudent;
+        private System.Windows.Forms.Button buttonDeleteAll;
+        private System.Windows.Forms.ComboBox comboBoxTable;
+        private System.Windows.Forms.Button buttonDeleteTable;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelTable;
     }
 }
 

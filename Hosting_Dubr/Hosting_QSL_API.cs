@@ -10,9 +10,7 @@ using System.Net;
 namespace Hosting_Dubr
 {
     class Hosting_QSL_API
-    {      
-      //                           Мой хостинг
-
+    {
         private static string link = "http://nikdresden.000webhostapp.com/";
 
         /*                       ExecutedCommand()
@@ -21,8 +19,9 @@ namespace Hosting_Dubr
          *  Возвращаем при помощи WebClient загруженную url-строку
          *  Т.е. Загружает запрошенный ресурс в виде String. Ресурс для загрузки, указанный как Uri.
          */
+
         #region ExecutedCommand
-        private static string ExecutedCommand(string command, string parameters= null) 
+        private static string ExecutedCommand(string command, string parameters = null)
         {
             WebClient cilent = new WebClient();
             string url = String.Format("{0}?command={1}&parameters={2}", link, command, parameters);
@@ -37,6 +36,7 @@ namespace Hosting_Dubr
         *  Преобразуем элементы url из Json в читаемый вид - unicode j8-ci && etc
         *  Получили параметры для добавления в таблицу
         */
+
         #region students.select.all
         public static List<Student> StudentsSelectAll()
         {
@@ -49,35 +49,67 @@ namespace Hosting_Dubr
         }
         #endregion
 
-     /*                                    StudentsDeleteByid()
-      *  command - удалить элемент по id 
-      *  Праметры - id, которые получили из dataGrid.  Cм. DeleteById()
-      *  Запрос - students.delete.byid
-      *  Преобразуем это в url при помощи ExecutedCommand()
-      */
+        /*                                    StudentsDeleteByid()
+         *  command - удалить элемент по id 
+         *  Праметры - id, которые получили из dataGrid.  Cм. DeleteById()
+         *  Запрос - students.delete.byid
+         *  Преобразуем это в url при помощи ExecutedCommand()
+         */
+
         #region students.delete.byid
         public static void StudentsDeleteByid(string id)
         {
             string command = "students.delete.byid";
             string parameters = id;
-            ExecutedCommand(command,parameters);
+
+            ExecutedCommand(command, parameters);
         }
         #endregion
 
         /*                    StudentsInsertNewStudent()
+
       *  Получаем команду от сервера QSL (скрипт.php) - изменить ячейку
       *  Запрос - students.insert.newstudent
       *  Передаем изменяемые параметры(student)(Полученные от AddNewStudent()) - конвертируем в Json объект класса Student
       *  Преобразуем в url при помощи ExecutedCommand
       *  Для того чтобы в дальнейшем отправить это (с помощью скрипта.php) на серевер QSL
       */
+
         #region students.insert.newstudent
         public static void StudentsInsertNewStudent(Student student)
         {
             string command = "students.insert.newstudent";
             string parameters = JsonConvert.SerializeObject(student);
 
-            ExecutedCommand(command,parameters);
+            ExecutedCommand(command, parameters);
+        }
+        #endregion
+
+        #region students.delete.all
+        public static void StudentsDeleteAll()
+        {
+            string command = "students.delete.all";
+            ExecutedCommand(command);
+        }
+        #endregion
+
+        #region students.delete.all
+        public static void StudentsDeleteTable(string NameTable)
+        {
+            string command = "students.delete.table";
+            string parameters = NameTable;
+
+            ExecutedCommand(command);
+        }
+        #endregion
+
+        #region students.delete.all
+        public static string StudentsShowTable()
+        {
+            string command = "students.show.table";
+            string result = ExecutedCommand(command);
+      
+            return result;
         }
         #endregion
 

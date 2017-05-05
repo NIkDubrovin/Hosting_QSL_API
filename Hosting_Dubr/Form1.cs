@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Hosting_Dubr
 {
     public partial class Form1 : Form
@@ -71,6 +72,33 @@ namespace Hosting_Dubr
             GetAllStudents();
         }
 
+        private void DeleteALL()
+        {
+            Hosting_QSL_API.StudentsDeleteAll();
+            dataGridViewStudents.Rows.Clear();
+            MessageBox.Show("Таблица очищена успешно");
+        }
+
+        private void DeleteTable()
+        {
+            //string NameTable = comboBoxTable.SelectedItem.ToString();
+
+            // Hosting_QSL_API.StudentsDeleteTable(NameTable);     
+            Get_Name_Tables();
+            MessageBox.Show("Таблица удалена успешно");
+        }
+
+        private void Get_Name_Tables()
+        {
+            comboBoxTable.SelectedIndex = -1;
+            string List_Tables = Hosting_QSL_API.StudentsShowTable();
+         
+
+            comboBoxTable.Items.Add(List_Tables);
+            labelTable.Text += List_Tables;
+
+        }
+
         private void ClearAddNewsStudentFields()
         {
             textBoxFirstName.Clear();
@@ -108,7 +136,7 @@ namespace Hosting_Dubr
 
             GetAllStudents();
         }
-        #endregion   // 
+        #endregion  
 
         public Form1()
         {
@@ -128,6 +156,16 @@ namespace Hosting_Dubr
         private void buttonAddStudent_Click(object sender, EventArgs e)
         {
             AddNewsStudent();
+        }
+
+        private void buttonDeleteAll_Click(object sender, EventArgs e)
+        {
+            DeleteALL();
+        }
+
+        private void buttonDeleteTable_Click(object sender, EventArgs e)
+        {
+            DeleteTable();
         }
     }
 }
