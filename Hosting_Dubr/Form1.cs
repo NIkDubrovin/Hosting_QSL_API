@@ -13,6 +13,15 @@ namespace Hosting_Dubr
 {
     public partial class Form1 : Form
     {
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        List<Student> students;
+        List<Table> tables;
+
         /*
          *                                  Вспомогательные методы
          *  ***************************************************************************                                
@@ -48,7 +57,7 @@ namespace Hosting_Dubr
         private void GetAllStudents()
         {
             dataGridViewStudents.Rows.Clear();
-            List<Student> students = Hosting_QSL_API.StudentsSelectAll();
+             students = Hosting_QSL_API.StudentsSelectAll();
 
             foreach (Student student in students)
             {
@@ -81,22 +90,21 @@ namespace Hosting_Dubr
 
         private void DeleteTable()
         {
-            //string NameTable = comboBoxTable.SelectedItem.ToString();
+            string NameTable = comboBoxTable.SelectedItem.ToString();
 
-            // Hosting_QSL_API.StudentsDeleteTable(NameTable);     
-            Get_Name_Tables();
+            Hosting_QSL_API.StudentsDeleteTable(NameTable);
             MessageBox.Show("Таблица удалена успешно");
         }
 
         private void Get_Name_Tables()
         {
             comboBoxTable.SelectedIndex = -1;
-            string List_Tables = Hosting_QSL_API.StudentsShowTable();
-         
+            tables = Hosting_QSL_API.StudentsShowTable();
 
-            comboBoxTable.Items.Add(List_Tables);
-            labelTable.Text += List_Tables;
-
+            foreach (Table table in tables)
+            {
+                comboBoxTable.Items.Add(table.NameTable);
+            }
         }
 
         private void ClearAddNewsStudentFields()
@@ -106,6 +114,7 @@ namespace Hosting_Dubr
             comboBoxSex.SelectedIndex = -1;
             maskedTextBoxAge.Clear();
             textBoxDescription.Clear();
+            textBoxId.Clear();
         }
 
         private void AddNewsStudent()
@@ -136,12 +145,74 @@ namespace Hosting_Dubr
 
             GetAllStudents();
         }
-        #endregion  
 
-        public Form1()
-        {
-            InitializeComponent();
+        private void FillAddNewsStudentFields()
+        {           
+            if (dataGridViewStudents.SelectedRows.Count == 0)  // Если ничего не выбрано, то ничего и не происходит
+            {
+                return;
+            }
+
+            DataGridViewRow selectStudent = dataGridViewStudents.SelectedRows[0];  // Выбранная строка
+
+            textBoxId.Text = selectStudent.Cells[0].Value.ToString();
+            textBoxFirstName.Text = selectStudent.Cells[1].Value.ToString();
+            textBoxLastName.Text = selectStudent.Cells[2].Value.ToString();
+            comboBoxSex.SelectedIndex = selectStudent.Cells[3].Value.ToString() == "Мужской" ? 1 : 2;
+            maskedTextBoxAge.Text = selectStudent.Cells[4].Value.ToString();
+            textBoxDescription.Text = selectStudent.Cells[5].Value.ToString();
+
         }
+
+        private void UpdateStudent()
+        {
+            if (
+            textBoxFirstName.Text == String.Empty ||
+            textBoxLastName.Text == String.Empty ||
+            comboBoxSex.SelectedIndex == -1 ||
+            maskedTextBoxAge.Text == String.Empty ||
+            textBoxDescription.Text == String.Empty)
+            {
+                MessageBox.Show("Заполнены не все поля");
+                return;
+            }
+
+            Student student = new Student()
+            {
+                Id = int.Parse(textBoxId.Text),
+                FirstName = textBoxFirstName.Text,
+                LastName = textBoxLastName.Text,
+                Sex = comboBoxSex.SelectedIndex,
+                Age = int.Parse(maskedTextBoxAge.Text),
+                Description = textBoxDescription.Text
+            };
+
+            Hosting_QSL_API.StudentsUpdateByid(student);
+
+            ClearAddNewsStudentFields();
+
+            GetAllStudents();
+        }
+
+
+        private void StudentsFind()
+        {
+            string searchText = textBoxFind.Text;       // Считываем с textBoxFind
+            dataGridViewStudents.Rows.Clear();
+           
+            foreach (Student student in students)
+            {
+                if (student.Id == int.Parse(searchText) || student.FirstName.ToLower().Contains(searchText.ToLower()) == true || student.LastName.ToLower().Contains(searchText.ToLower()) == true || student.Sex == int.Parse(searchText) || student.Age == int.Parse(searchText) || student.Description.ToLower().Contains(searchText.ToLower())==true)
+                {
+                    dataGridViewStudents.Rows.Add
+                   (
+                   student.Id, student.FirstName, student.LastName, student.Sex == 1 ? "Мужской" : "Женский", student.Age, student.Description
+                   );
+                }         
+            }
+        }
+
+        #endregion
 
         private void buttonGetAllStudents_Click(object sender, EventArgs e)
         {
@@ -167,5 +238,45 @@ namespace Hosting_Dubr
         {
             DeleteTable();
         }
+
+        private void buttonClearAddNewStudentsFiiekds_Click(object sender, EventArgs e)
+        {
+            FillAddNewsStudentFields();
+
+        }
+
+        private void dataGridViewStudents_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void buttonUpdateStudents_Click(object sender, EventArgs e)
+        {
+            UpdateStudent();
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            StudentsFind();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Get_Name_Tables();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //  new FormLoad().ShowDialog();
+            // Close();
+            Get_Name_Tables();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           // if (MessageBox.Show("Вы точно хотите выйти?", "Выход", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) { e.Cancel = true; }
+        }
+
+        
     }
 }

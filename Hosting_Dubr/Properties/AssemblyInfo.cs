@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
 [assembly: AssemblyTitle("Hosting_Dubr")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyDescription("Проект является реализацией связи между SQL-сервером(БД) и клиентом, взаимодействующим с БД при помощи API. API реализовано при помощи скрипта.php - главное взаимодействие с QSL-сервером и VS-программы на C#")]
+[assembly: AssemblyConfiguration("First Table Students")]
+[assembly: AssemblyCompany("DubrCompany")]
 [assembly: AssemblyProduct("Hosting_Dubr")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]

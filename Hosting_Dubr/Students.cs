@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 
-using Newtonsoft.Json;  // Подеключаем Newtonsoft.Json
+using Newtonsoft.Json;  // Подключаем Newtonsoft.Json
 
 namespace Hosting_Dubr
 {

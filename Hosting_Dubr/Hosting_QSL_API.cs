@@ -12,6 +12,8 @@ namespace Hosting_Dubr
     class Hosting_QSL_API
     {
         private static string link = "http://nikdresden.000webhostapp.com/";
+     //   private static string link = "http://raymna208.000webhostapp.com/";
+        
 
         /*                       ExecutedCommand()
          *  Универсальный метод для построения запросов к серверу 
@@ -85,6 +87,12 @@ namespace Hosting_Dubr
         }
         #endregion
 
+        /*                    StudentsDeleteAll()
+         *  Отправляем на хостинг(скрипт.php) команду - students.delete.all            
+         *  Скрипт отправляет на MyQSL-сервер запрос на очищение данных таблицы  students               
+         *  Очищение таблицы                    
+         */
+
         #region students.delete.all
         public static void StudentsDeleteAll()
         {
@@ -93,23 +101,35 @@ namespace Hosting_Dubr
         }
         #endregion
 
-        #region students.delete.all
+        #region students.show.table
+        public static List<Table> StudentsShowTable()
+        {
+            string command = "students.show.table";
+            string result = ExecutedCommand(command);
+
+            List<Table> List_Tables = JsonConvert.DeserializeObject<List<Table>>(result);
+
+            return List_Tables;
+        }
+        #endregion
+
+        #region students.delete.table
         public static void StudentsDeleteTable(string NameTable)
         {
             string command = "students.delete.table";
             string parameters = NameTable;
 
-            ExecutedCommand(command);
+            ExecutedCommand(command, parameters);          
         }
         #endregion
 
-        #region students.delete.all
-        public static string StudentsShowTable()
+        #region students.update.byid
+        public static void StudentsUpdateByid(Student student)
         {
-            string command = "students.show.table";
-            string result = ExecutedCommand(command);
-      
-            return result;
+            string command = "students.update.byid";
+            string parameters = JsonConvert.SerializeObject(student);
+
+            ExecutedCommand(command, parameters);
         }
         #endregion
 
