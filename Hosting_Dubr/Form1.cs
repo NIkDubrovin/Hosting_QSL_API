@@ -22,7 +22,7 @@ namespace Hosting_Dubr
         List<Student> students;
         List<Table> tables;
 
-        /*
+        /*  Информация о некоторых методах
          *                                  Вспомогательные методы
          *  ***************************************************************************                                
          *                                    GetAllStudents()
