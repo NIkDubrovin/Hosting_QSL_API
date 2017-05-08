@@ -98,7 +98,9 @@ namespace Hosting_Dubr
 
         private void Get_Name_Tables()
         {
+            comboBoxTable.Items.Clear();
             comboBoxTable.SelectedIndex = -1;
+            
             tables = Hosting_QSL_API.StudentsShowTable();
 
             foreach (Table table in tables)

@@ -12,7 +12,7 @@ namespace Hosting_Dubr
     class Hosting_QSL_API
     {
         private static string link = "http://nikdresden.000webhostapp.com/";
-     //   private static string link = "http://raymna208.000webhostapp.com/";
+      // private static string link = "http://raymna208.000webhostapp.com/";
         
 
         /*                       ExecutedCommand()
