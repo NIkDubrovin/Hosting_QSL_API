@@ -1,3 +1,5 @@
+
+
 <?php
                /* Передаем Данные хоста в $link при помощи mysqli_connect (стандарт PHP 7) - соединяемся c сервером SQL
                *  Конвертируем  в utf8
@@ -53,4 +55,40 @@ mysqli_query($link, "INSERT INTO `students` (`first_name`,`last_name`,`sex`,`age
 
 break;
 }
+
+/*
+*   Если command = students.delete.all
+*   Передаем переменной команду TRUNCATE TABLE
+*   посылаем запрос на QSL - TRUNCATE TABLE 
+*   Очищаем таблицу
+*/
+
+case 'students.delete.all' :
+$query = "TRUNCATE TABLE `students`";
+mysqli_query($link,$query);
+break;
+
+/*
+*   Если command = students.dead.add
+*   Передаем переменной команду DROP TABLE
+*   Посылаем запрос на QSL - DROP TABLE 
+*   Удаляем таблицу
+*/
+
+case 'students.delete.table' :
+$TABLE = $parameters;
+$query = "DROP TABLE `{$TABLE}`";
+mysqli_query($link,$query);
+break;
+
+case 'students.show.table' :
+$query_result = mysqli_query($link,"SHOW TABLES");
+$data_table = array();
+while($currentRow_Table = mysqli_fetch_array($query_result,MYSQLI_ASSOC))
+{
+$data_table[] = $currentRow;
+}
+echo json_encode($data_table);
+
+break;
 ?>
