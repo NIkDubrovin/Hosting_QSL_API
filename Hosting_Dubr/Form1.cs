@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Threading;
+
 
 namespace Hosting_Dubr
 {
@@ -57,7 +59,18 @@ namespace Hosting_Dubr
         private void GetAllStudents()
         {
             dataGridViewStudents.Rows.Clear();
-             students = Hosting_QSL_API.StudentsSelectAll();
+            students = Hosting_QSL_API.StudentsSelectAll();
+
+           /* // Task.Factory.StartNew((x) => GetAllStudents());
+            // Task.Factory.StartNew(() => SelectAllTask());
+             Task<List<Student>> task1 = new Task<List<Student>>(() => {
+
+                  return students = Hosting_QSL_API.StudentsSelectAll();
+              });
+              task1.Start();
+
+        //    Task<List<Student>> task1 = new Task<List<Student>>(() => SelectAllTask());
+          //  Task.WaitAll(task1);*/
 
             foreach (Student student in students)
             {
@@ -67,6 +80,7 @@ namespace Hosting_Dubr
                     );
             }
         }
+       
         private void DeleteById()
         {
             if (dataGridViewStudents.SelectedRows.Count == 0)
@@ -81,9 +95,9 @@ namespace Hosting_Dubr
             GetAllStudents();
         }
 
-        private void DeleteALL()
+        private void CleanALL()
         {
-            Hosting_QSL_API.StudentsDeleteAll();
+            //Hosting_QSL_API.StudentsDeleteAll();
             dataGridViewStudents.Rows.Clear();
             MessageBox.Show("Таблица очищена успешно");
         }
@@ -92,7 +106,8 @@ namespace Hosting_Dubr
         {
             string NameTable = comboBoxTable.SelectedItem.ToString();
 
-            Hosting_QSL_API.StudentsDeleteTable(NameTable);
+           // Hosting_QSL_API.StudentsDeleteTable(NameTable);
+            Task.Factory.StartNew(() => Hosting_QSL_API.StudentsDeleteTable(NameTable));
             MessageBox.Show("Таблица удалена успешно");
         }
 
@@ -204,7 +219,7 @@ namespace Hosting_Dubr
            
             foreach (Student student in students)
             {
-                if (student.Id == int.Parse(searchText) || student.FirstName.ToLower().Contains(searchText.ToLower()) == true || student.LastName.ToLower().Contains(searchText.ToLower()) == true || student.Sex == int.Parse(searchText) || student.Age == int.Parse(searchText) || student.Description.ToLower().Contains(searchText.ToLower())==true)
+                if ( student.FirstName.ToLower().Contains(searchText.ToLower()) == true || student.LastName.ToLower().Contains(searchText.ToLower()) == true /*|| student.Sex == int.Parse(searchText) || student.Age == int.Parse(searchText)*/ || student.Description.ToLower().Contains(searchText.ToLower())==true)
                 {
                     dataGridViewStudents.Rows.Add
                    (
@@ -219,6 +234,7 @@ namespace Hosting_Dubr
         private void buttonGetAllStudents_Click(object sender, EventArgs e)
         {
             GetAllStudents();
+            //  Task.Factory.StartNew(() => GetAllStudents());
         }
 
         private void buttonDeleteById_Click(object sender, EventArgs e)
@@ -233,7 +249,7 @@ namespace Hosting_Dubr
 
         private void buttonDeleteAll_Click(object sender, EventArgs e)
         {
-            DeleteALL();
+            CleanALL();
         }
 
         private void buttonDeleteTable_Click(object sender, EventArgs e)
@@ -272,6 +288,7 @@ namespace Hosting_Dubr
             //  new FormLoad().ShowDialog();
             // Close();
             Get_Name_Tables();
+          //  Task.Factory.StartNew(() => Get_Name_Tables());
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

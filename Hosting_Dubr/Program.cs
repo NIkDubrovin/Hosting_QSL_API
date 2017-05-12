@@ -16,7 +16,8 @@ namespace Hosting_Dubr
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLoad());
+             Application.Run(new FormLoad());
+          //  Application.Run(new Form1());
         }
     }
 }
